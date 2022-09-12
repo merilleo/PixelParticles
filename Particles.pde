@@ -22,7 +22,6 @@ interface AbstractParticle {
     public float getMass();
     public color getColor();
 
-    //public PVector addAbstractForce(AbstractForce force, PVector vec, float strength);
 }
 
 // Basic Particle Class

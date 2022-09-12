@@ -6,13 +6,9 @@ Image img01;
 
 
 AbstractParticle particle = new Particle();
+ArrayList<AbstractForce> forces = new ArrayList<AbstractForce>();
+ArrayList<AbstractDrawingMethode> drawingMethods;
 
-ArrayList<AbstractForce> forces = new ArrayList<AbstractForce> ();
-forces.add(new RandomForce(0.1));
-forces.add(new DragForce());
-
-ArrayList<AbstractDrawingMethode> drawingMethods = new ArrayList<AbstractDrawingMethode> ();
-drawingMethods.add(new DrawSquare(10));
 
 PImage pimage;
 
@@ -23,7 +19,16 @@ void setup() {
 
 
     utils = new UtilityFunctions();
-	
+    
+    
+    forces = new ArrayList<AbstractForce>();
+    forces.add(new RandomForce(0.1));
+    forces.add(new DragForce());
+
+	drawingMethods = new ArrayList<AbstractDrawingMethode>();
+    drawingMethods.add(new DrawSquare(10));
+    
+    
     ps = new ParticleSystem();
     ps.addForceList(forces);
     ps.addDrawingMethodeList(drawingMethods);
@@ -39,13 +44,13 @@ void setup() {
 void draw() {
 
     ps.update();
-
+    /*
     ps.getParticleList().forEach(p - > p.setColor(
         img01.getPixel(
-        utils.getNearestIndex(p.getX(), p.getY(), img01.getWidth())
+            utils.getNearestIndex(p.getX(), p.getY(), img01.getWidth())
         ).getColor()
 
         ));
-
-    //utils.showFramerate();
+    */
+    utils.showFramerate();
 }

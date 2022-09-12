@@ -127,7 +127,7 @@ class Forces {
 
     /* --------- Negative Forces --------- */
 
-    // aapproximetly  calculates  the drag force
+    // approximetly  calculates  the drag force
     PVector getDragForce(PVector velocity, PVector force) {
         /*
          float density = 1.2  // for Air https://en.wikipedia.org/wiki/Density

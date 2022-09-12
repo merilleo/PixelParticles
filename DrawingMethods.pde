@@ -12,10 +12,11 @@ class DrawSquare implements AbstractDrawingMethode {
     public void drawParticle(AbstractParticle p) {
         noStroke();
         fill( p.getColor() );
-        rect( p.getPosition().x, p.getPosition().y, this.size, this.size );
+        rect( p.getX(), p.getY(), this.size, this.size );
     }
 }
 
+/*
 class DrawingMethods {
 
     void rectangle(float x, float y, float size, color col) {
@@ -34,3 +35,4 @@ class DrawingMethods {
         rect(particle.getPosition().x, particle.getPosition().y, size, size);
     }
 }
+*/
