@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public interface Settings {
     Main sketch = new Main();
-    int height = 200;
-    int width = 200;
+    int height = 1024;
+    int width  = 1024;
 
 
     ParticleSystem ps = new ParticleSystem();

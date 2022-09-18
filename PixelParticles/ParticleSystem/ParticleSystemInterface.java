@@ -1,6 +1,7 @@
 package PixelParticles.ParticleSystem;
 
 import PixelParticles.DrawingMethods.DrawingMethodInterface;
+import PixelParticles.Image.Image;
 
 import java.util.ArrayList;
 
@@ -20,4 +21,5 @@ public interface ParticleSystemInterface {
     void setRandomPositions();
     int getLength();
     void applyForceToAll(ParticleInterface force);
+    void setColorsFromImage(Image img);
 }

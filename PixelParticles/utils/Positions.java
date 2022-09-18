@@ -1,10 +1,13 @@
 package PixelParticles.utils;
 
+import processing.core.PVector;
+
 import static processing.core.PApplet.floor;
+import static processing.core.PApplet.round;
 
 public class Positions {
     public static int getIndexFromXY(int x, int y, int width) {
-        return ( x + y*width );
+        return ( x + y * width );
     }
     public static int getXFromIndex(int index, int width) {
         return ( index % width );
@@ -13,12 +16,15 @@ public class Positions {
         return ( floor(index / width) );
     }
     public static int getNearestX(float x) {
-        return (int) floor(x);
+        return floor(x);
     }
     public static int getNearestY(float y) {
-        return (int) floor(y);
+        return floor(y);
     }
     public static int getNearestIndex(float x, float y, int width) {
-        return Positions.getIndexFromXY((int) floor(x), (int) floor(y), width);
+        return Positions.getIndexFromXY(floor(x), floor(y), width);
+    }
+    public static int getNearestIndexFromVector(PVector pos, int width) {
+        return Positions.getIndexFromXY(floor(pos.x), floor(pos.y), width);
     }
 }

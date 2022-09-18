@@ -2,10 +2,15 @@ package PixelParticles.ParticleSystem;
 
 import PixelParticles.DrawingMethods.DrawingMethodInterface;
 import PixelParticles.Forces.ForceInterface;
+import PixelParticles.Image.Image;
 import processing.core.PVector;
+
+import java.awt.*;
 import java.util.ArrayList;
 import PixelParticles.Settings;
 import PixelParticles.utils.ScreenWrapper;
+
+import static PixelParticles.utils.Positions.getNearestIndexFromVector;
 import static PixelParticles.utils.Random.random;
 
 public class ParticleSystem {
@@ -101,5 +106,20 @@ public class ParticleSystem {
 
     public void applyForceToAll(ForceInterface force) {
         this.particles.forEach(p -> p.addForce( force.getForce(p) ));
+    }
+
+    public void setColorsFromImage(Image img) {
+        for (ParticleInterface p : this.particles) {
+            int index = getNearestIndexFromVector( p.getPosition(), img.getWidth() );
+            Color col = img.getPixel(index).getColor();
+            p.setColor(col);
+        }
+    }
+    public void lerpColorFromImage(Image img, float smoothing) {
+        for (ParticleInterface p : this.particles) {
+            int index = getNearestIndexFromVector( p.getPosition(), img.getWidth() );
+            Color col = img.getPixel(index).getColor();
+            p.lerpColor(col, smoothing);
+        }
     }
 }

@@ -61,4 +61,5 @@ public class Pixel implements PixelInterface {
     public float getBlue()  { return this.b ;}
     public float getAlpha() { return this.a ;}
     public PixelInterface getClone(int width) { return new Pixel(this, width); }
+
 }

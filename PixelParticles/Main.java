@@ -22,26 +22,28 @@ public class Main extends PApplet{
     }
     public void setup(){
 
+        PixelInterface pixel = new Pixel(0, width, new Color(0, 0, 0));
+        PImage pimage;
+        Path path = Paths.get("PixelParticles/data/uv_checker large.png");
+        pimage = loadImage(path.toAbsolutePath().toString());
+        Settings.img01.importPImage(pimage, pixel);
+
         Settings.forces.add(new RandomForce((float) 0.1));
         Settings.forces.add(new DragForce());
 
-        Settings.drawingMethods.add(new DrawSquare(10));
+        Settings.drawingMethods.add(new DrawSquare(5));
 
         Settings.ps.addForceList(Settings.forces);
         Settings.ps.addDrawingMethodeList(Settings.drawingMethods);
-        Settings.ps.spawnNumberOfParticles(25, Settings.particle);
+        Settings.ps.spawnNumberOfParticles(25000, Settings.particle);
         Settings.ps.setRandomPositions();
+        Settings.ps.setColorsFromImage(Settings.img01);
 
-        PixelInterface pixel = new Pixel(0, width, new Color(0, 0, 0));
-
-        PImage pimage;
-        Path path = Paths.get("PixelParticles/data/frau_02_a.jpg");
-        pimage = loadImage(path.toAbsolutePath().toString());
-        Settings.img01.importPImage(pimage, pixel);
     }
 
     public void draw(){
         Settings.ps.update();
+        Settings.ps.lerpColorFromImage(Settings.img01, 0.1F);
         showFramerate();
     }
 
