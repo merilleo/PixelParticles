@@ -1,7 +1,5 @@
 package PixelParticles.utils;
 
-import static processing.core.PApplet.floor;
-
 public class MathUtils {
     public static float minMaxValue(float val, float min, float max) {
         val = (val <= min) ? min : val;

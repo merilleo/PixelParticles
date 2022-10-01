@@ -3,6 +3,7 @@ package PixelParticles;
 import PixelParticles.DrawingMethods.DrawingMethodInterface;
 import PixelParticles.Forces.ForceInterface;
 import PixelParticles.Image.Image;
+import PixelParticles.ParticleSystem.ColorRecalculatorInterface;
 import PixelParticles.ParticleSystem.Particle;
 import PixelParticles.ParticleSystem.ParticleSystem;
 
@@ -16,10 +17,11 @@ public interface Settings {
 
     ParticleSystem ps = new ParticleSystem();
     Image img01 = new Image(Settings.width, Settings.height);
+    Image img02 = new Image(Settings.width, Settings.height);
 
     Particle particle = new Particle();
     ArrayList<ForceInterface> forces = new ArrayList<ForceInterface>();
-
     ArrayList<DrawingMethodInterface> drawingMethods = new ArrayList<DrawingMethodInterface>();
+    ArrayList<ColorRecalculatorInterface> colorRecalculators = new ArrayList<ColorRecalculatorInterface>();
 
 }

@@ -13,7 +13,6 @@ public interface ParticleInterface {
     void setAcceleration(PVector a);
     void setMass(float m);
     void setColor(Color col);
-    void lerpColor(Color col, float smoothingFactor);
 
 
     ParticleInterface getClone();

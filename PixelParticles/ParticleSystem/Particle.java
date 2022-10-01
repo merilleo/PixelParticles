@@ -3,8 +3,6 @@ package PixelParticles.ParticleSystem;
 import processing.core.PVector;
 import java.awt.*;
 
-import static PixelParticles.utils.MathUtils.getSmoothedValue;
-import static PixelParticles.utils.MathUtils.minMaxValue;
 
 public class Particle implements ParticleInterface {
     private PVector p;
@@ -20,7 +18,7 @@ public class Particle implements ParticleInterface {
         this.a = new PVector();
         this.f = new PVector();
         this.m = 1;
-        this.col = new Color(0, 0, 0);
+        this.col = new Color(0, 0, 0, 0);
     }
 
     Particle(ParticleInterface particle) {
@@ -49,17 +47,7 @@ public class Particle implements ParticleInterface {
     public void setMass(float m)           { this.m = m; }
     public void setColor(Color col)        { this.col = col; }
 
-    public void lerpColor(Color col, float smoothing) {
-        int r = (int) getSmoothedValue(this.col.getRed(), col.getRed(), smoothing);
-        int g = (int) getSmoothedValue(this.col.getGreen(), col.getGreen(), smoothing);
-        int b = (int) getSmoothedValue(this.col.getBlue(), col.getBlue(), smoothing);
 
-        r = (int) minMaxValue(r, 0, 255);
-        g = (int) minMaxValue(g, 0, 255);
-        b = (int) minMaxValue(b, 0, 255);
-
-        this.setColor(new Color(r, g, b));
-    }
 
     public Particle getClone()        { return new Particle(this); }
     public PVector  getForce()        { return this.f.copy(); }

@@ -3,7 +3,6 @@ package PixelParticles.utils;
 import processing.core.PVector;
 
 import static processing.core.PApplet.floor;
-import static processing.core.PApplet.round;
 
 public class Positions {
     public static int getIndexFromXY(int x, int y, int width) {
@@ -13,7 +12,7 @@ public class Positions {
         return ( index % width );
     }
     public static int getYFromIndex(int index, int width) {
-        return ( floor(index / width) );
+        return ( floor( index * 1.0F / width) );
     }
     public static int getNearestX(float x) {
         return floor(x);

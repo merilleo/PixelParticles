@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import PixelParticles.Settings;
 import PixelParticles.utils.ScreenWrapper;
 
+import static PixelParticles.utils.ColorUtils.convertToTransparentColor;
 import static PixelParticles.utils.Positions.getNearestIndexFromVector;
 import static PixelParticles.utils.Random.random;
 
@@ -17,6 +18,7 @@ public class ParticleSystem {
     ArrayList<ParticleInterface> particles;
     ArrayList<ForceInterface> forces;
     ArrayList<DrawingMethodInterface> drawingMethods;
+    ArrayList<ColorRecalculatorInterface> colorRecalculators;
     ScreenWrapper wrapper;
 
 
@@ -24,6 +26,7 @@ public class ParticleSystem {
         this.particles = new ArrayList<ParticleInterface>();
         this.forces = new ArrayList<ForceInterface>();
         this.drawingMethods = new ArrayList<DrawingMethodInterface>();
+        this.colorRecalculators = new ArrayList<ColorRecalculatorInterface>();
         this.wrapper = new ScreenWrapper(Settings.width, Settings.height);
     }
 
@@ -31,6 +34,9 @@ public class ParticleSystem {
         this.applyForces();
         this.updateParticles();
         this.applyScreenWrapper();
+    }
+    public void drawPS() {
+        this.recalculateColors();
         this.drawParticles();
     }
 
@@ -59,7 +65,15 @@ public class ParticleSystem {
     }
 
     public void addDrawingMethodeList(ArrayList<DrawingMethodInterface> drawingMethodeList) {
-        drawingMethodeList.forEach( dm -> this.addDrawingMethode(dm) );
+        drawingMethodeList.forEach( drawingMethode -> this.addDrawingMethode(drawingMethode) );
+    }
+
+    public void addColorRecalculator(ColorRecalculatorInterface colorRecalculator) {
+        this.colorRecalculators.add(colorRecalculator);
+    }
+
+    public void addColorRecalculatorList(ArrayList<ColorRecalculatorInterface> colorRecalculatorList) {
+        colorRecalculators.forEach( colorRecalculator -> this.addColorRecalculator(colorRecalculator) );
     }
 
     public void applyForces() {
@@ -75,6 +89,16 @@ public class ParticleSystem {
             for (ParticleInterface p : this.particles) {
                 dm.drawParticle(p);
             }
+        }
+    }
+
+    public void recalculateColors() {
+        for (ColorRecalculatorInterface recalculator : this.colorRecalculators) {
+            for (ParticleInterface p : this.particles) {
+                Color col = recalculator.getParticleColorFromImage(p);
+                p.setColor(col);
+            }
+
         }
     }
 
@@ -115,11 +139,11 @@ public class ParticleSystem {
             p.setColor(col);
         }
     }
-    public void lerpColorFromImage(Image img, float smoothing) {
+    public void setColorsFromImageWithAlpha(Image img,int alpha) {
         for (ParticleInterface p : this.particles) {
             int index = getNearestIndexFromVector( p.getPosition(), img.getWidth() );
             Color col = img.getPixel(index).getColor();
-            p.lerpColor(col, smoothing);
+            p.setColor(convertToTransparentColor(col, alpha));
         }
     }
 }
