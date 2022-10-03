@@ -8,10 +8,10 @@ public class ScreenWrapper {
     int h;
     int buffer;
 
-    public ScreenWrapper(int w, int h) {
+    public ScreenWrapper(int w, int h, int buffer) {
         this.w = w;
         this.h = h;
-        this.buffer = 1;
+        this.buffer = buffer;
     }
 
     private PVector getWrappedPosition(PVector p) {

@@ -8,12 +8,13 @@ import PixelParticles.ParticleSystem.Particle;
 import PixelParticles.ParticleSystem.ParticleSystem;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public interface Settings {
     Main sketch = new Main();
     int height = 1024;
     int width  = 1024;
-
+    Random rngGenerator = new Random(1024);
 
     ParticleSystem ps = new ParticleSystem();
     Image img01 = new Image(Settings.width, Settings.height);

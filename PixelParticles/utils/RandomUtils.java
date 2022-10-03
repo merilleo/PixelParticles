@@ -1,6 +1,6 @@
 package PixelParticles.utils;
 
-public class Random {
+public class RandomUtils {
     public static float random(int max)   { return (float) (Math.random() * max); }
     public static float random(float max) { return (float) (Math.random() * max); }
 

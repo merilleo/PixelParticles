@@ -29,7 +29,7 @@ public class Particle implements ParticleInterface {
         this.m =   particle.getMass();
         this.col = particle.getColor();
     }
-
+    @Override
     public void update() {
         this.a = this.f.div(this.m);
         this.v.add(this.a);

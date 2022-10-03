@@ -12,7 +12,7 @@ import PixelParticles.utils.ScreenWrapper;
 
 import static PixelParticles.utils.ColorUtils.convertToTransparentColor;
 import static PixelParticles.utils.Positions.getNearestIndexFromVector;
-import static PixelParticles.utils.Random.random;
+import static PixelParticles.utils.RandomUtils.random;
 
 public class ParticleSystem {
     ArrayList<ParticleInterface> particles;
@@ -27,7 +27,7 @@ public class ParticleSystem {
         this.forces = new ArrayList<ForceInterface>();
         this.drawingMethods = new ArrayList<DrawingMethodInterface>();
         this.colorRecalculators = new ArrayList<ColorRecalculatorInterface>();
-        this.wrapper = new ScreenWrapper(Settings.width, Settings.height);
+        this.wrapper = new ScreenWrapper(Settings.width, Settings.height, 1);
     }
 
     public void update() {

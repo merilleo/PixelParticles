@@ -2,7 +2,7 @@ package PixelParticles.Forces;
 
 import PixelParticles.ParticleSystem.ParticleInterface;
 import processing.core.PVector;
-import static PixelParticles.utils.Random.random;
+import static PixelParticles.utils.RandomUtils.random;
 
 public class RandomForce implements ForceInterface{
     Float input;
