@@ -51,20 +51,20 @@ public class Main extends PApplet{
         //Settings.ps.addForce(new LinearForce(new PVector(1,0), 1));
         //Settings.ps.addForce(new PerlinForce(1, 10F, 0.5F));
         //Settings.ps.addForce(new ValueNoise(1024/4, 1024/4));
-        Settings.ps.addForce(new DragForce());
 
         RandomFieldObject fieldObject = new RandomFieldObject();
-        Settings.ps.addForce(new LinearRandomField(2,2, fieldObject, Settings.sketch));
+        Settings.ps.addForce(new LinearRandomField(0.1F, 20,20, fieldObject, Settings.sketch));
+        Settings.ps.addForce(new DragForce());
 
 
 //        Settings.ps.addDrawingMethode(new DrawSquare(1));
-        Settings.ps.addDrawingMethode(new DrawLine(3));
+        Settings.ps.addDrawingMethode(new DrawLine(2));
 
-        //Settings.ps.addColorRecalculator(new ForceColor());
-//        Settings.ps.addColorRecalculator(new LerpImageColor(Settings.img02, 0.5F));
+//        Settings.ps.addColorRecalculator(new ForceColor());
+        Settings.ps.addColorRecalculator(new LerpImageColor(Settings.img02, 0.1F));
 //        Settings.ps.addColorRecalculator(new ImageColorWithAlpha(Settings.img02, 255));
-        Settings.ps.addColorRecalculator(new ConstantImageColorWithAlpha(Settings.img02, 100));
-        //Settings.ps.addColorRecalculator(new PerlinColor());
+//        Settings.ps.addColorRecalculator(new ConstantImageColorWithAlpha(Settings.img02, 100));
+//        Settings.ps.addColorRecalculator(new PerlinColor());
 
 
         //Settings.ps.addForceList(Settings.forces);

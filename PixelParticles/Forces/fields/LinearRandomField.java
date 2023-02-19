@@ -12,6 +12,7 @@ import static processing.core.PApplet.*;
 import static processing.core.PConstants.PI;
 
 public class LinearRandomField implements FieldInterface{
+    float strength;
     int columns;
     int rows;
     float cellWidth;
@@ -20,7 +21,8 @@ public class LinearRandomField implements FieldInterface{
     FieldObjectInterface[] cells;
     FieldObjectInterface[] bakedCells;
 
-    public LinearRandomField(int columns, int rows, FieldObjectInterface object, PApplet sketch) {
+    public LinearRandomField(float strength, int columns, int rows, FieldObjectInterface object, PApplet sketch) {
+        this.strength = strength;
         this.columns = columns;
         this.rows = rows;
         this.cellWidth = sketch.width / (float)this.columns;
@@ -38,7 +40,7 @@ public class LinearRandomField implements FieldInterface{
         cellPosition.y /= this.cellHeight;
         int index = getNearestIndexFromVector(cellPosition, this.columns );
         float angle = map(this.cells[index].getValue(), 0, 255, 0, TWO_PI);
-        return PVector.fromAngle(angle).mult(0.01F);
+        return PVector.fromAngle(angle).mult(this.strength);
     }
 
     @Override
