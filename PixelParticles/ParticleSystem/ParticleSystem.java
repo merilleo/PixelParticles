@@ -41,11 +41,15 @@ public class ParticleSystem {
     }
 
     public void updateParticles() {
-        this.particles.forEach(p -> p.update());
+        this.particles.forEach(ParticleInterface::update);
     }
+    public void updateParticlesStartPosition() { this.particles.forEach(ParticleInterface::setStartPosition); }
 
     public void applyScreenWrapper() {
-        this.particles.forEach(p -> p.setPosition( this.wrapper.applyWrapping(p) ));
+        for (ParticleInterface p : this.particles) {
+            p.setPosition( this.wrapper.applyWrapping(p) );
+            p.setPrevPosition( this.wrapper.applyWrapping(p.getPrevPosition()) );
+        }
     }
 
     public void addParticle(ParticleInterface particle) {
@@ -57,7 +61,7 @@ public class ParticleSystem {
     }
 
     public void addForceList(ArrayList<ForceInterface> forceList) {
-        forceList.forEach( f -> this.addForce(f) );
+        forceList.forEach(this::addForce);
     }
 
     public void addDrawingMethode(DrawingMethodInterface drawingMethode) {
@@ -65,7 +69,7 @@ public class ParticleSystem {
     }
 
     public void addDrawingMethodeList(ArrayList<DrawingMethodInterface> drawingMethodeList) {
-        drawingMethodeList.forEach( drawingMethode -> this.addDrawingMethode(drawingMethode) );
+        drawingMethodeList.forEach(this::addDrawingMethode);
     }
 
     public void addColorRecalculator(ColorRecalculatorInterface colorRecalculator) {
@@ -112,6 +116,7 @@ public class ParticleSystem {
         for (int i = 0; i < this.particles.size(); i++) {
             PVector pos = new PVector(random(Settings.width), random(Settings.height));
             this.getParticle(i).setPosition( pos );
+            this.getParticle(i).setStartPosition();
         }
     }
 

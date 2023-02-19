@@ -9,6 +9,8 @@ public interface ParticleInterface {
 
     void setForce(PVector f);
     void setPosition(PVector p);
+    void setPrevPosition(PVector p);
+    void setStartPosition();
     void setVelocity(PVector v);
     void setAcceleration(PVector a);
     void setMass(float m);
@@ -18,8 +20,12 @@ public interface ParticleInterface {
     ParticleInterface getClone();
     PVector getForce();
     PVector getPosition();
+    PVector getPrevPosition();
+    PVector getStartPosition();
     float getX();
     float getY();
+    float getPrevX();
+    float getPrevY();
     PVector getVelocity();
     PVector getAcceleration();
     float getMass();
