@@ -1,7 +1,7 @@
 package PixelParticles.ParticleSystem;
 
-import PixelParticles.DrawingMethods.DrawingMethodInterface;
-import PixelParticles.Image.Image;
+import PixelParticles.Draw.DrawingMethods.DrawingMethodInterface;
+import PixelParticles.utils.Image.Image;
 
 import java.util.ArrayList;
 

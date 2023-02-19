@@ -1,5 +1,7 @@
 package PixelParticles.ParticleSystem;
 
+import PixelParticles.Draw.ColorRecalculators.ColorRecalculatorInterface;
+
 import java.awt.*;
 
 import static PixelParticles.utils.MathUtils.minMaxValue;

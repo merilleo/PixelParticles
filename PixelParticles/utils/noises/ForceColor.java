@@ -1,6 +1,6 @@
 package PixelParticles.utils.noises;
 
-import PixelParticles.ParticleSystem.ColorRecalculatorInterface;
+import PixelParticles.Draw.ColorRecalculators.ColorRecalculatorInterface;
 import PixelParticles.ParticleSystem.ParticleInterface;
 import processing.core.PVector;
 

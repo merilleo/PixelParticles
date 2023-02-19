@@ -1,9 +1,9 @@
 package PixelParticles;
 
-import PixelParticles.DrawingMethods.DrawingMethodInterface;
+import PixelParticles.Draw.DrawingMethods.DrawingMethodInterface;
 import PixelParticles.Forces.ForceInterface;
-import PixelParticles.Image.Image;
-import PixelParticles.ParticleSystem.ColorRecalculatorInterface;
+import PixelParticles.utils.Image.Image;
+import PixelParticles.Draw.ColorRecalculators.ColorRecalculatorInterface;
 import PixelParticles.ParticleSystem.Particle;
 import PixelParticles.ParticleSystem.ParticleSystem;
 

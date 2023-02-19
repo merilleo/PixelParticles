@@ -1,9 +1,8 @@
-package PixelParticles.ParticleSystem;
+package PixelParticles.Draw.ColorRecalculators;
 
-import PixelParticles.Image.Image;
+import PixelParticles.ParticleSystem.ParticleInterface;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public interface ColorRecalculatorInterface {
     Color getParticleColorFromImage(ParticleInterface p);

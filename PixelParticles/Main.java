@@ -1,24 +1,14 @@
 package PixelParticles;
 
-import PixelParticles.DrawingMethods.DrawLine;
-import PixelParticles.DrawingMethods.DrawSquare;
+import PixelParticles.Draw.DrawingMethods.DrawLine;
 import PixelParticles.Forces.DragForce;
-import PixelParticles.Forces.LinearForce;
-import PixelParticles.Forces.PerlinForce;
-import PixelParticles.Forces.RandomForce;
 import PixelParticles.Forces.fields.LinearRandomField;
 import PixelParticles.Forces.fields.RandomFieldObject;
-import PixelParticles.Image.Pixel;
-import PixelParticles.Image.PixelInterface;
-import PixelParticles.ParticleSystem.ConstantImageColorWithAlpha;
-import PixelParticles.ParticleSystem.ImageColorWithAlpha;
-import PixelParticles.ParticleSystem.LerpImageColor;
-import PixelParticles.ParticleSystem.PerlinColor;
-import PixelParticles.utils.noises.ForceColor;
-import PixelParticles.utils.noises.ValueNoise;
+import PixelParticles.utils.Image.Pixel;
+import PixelParticles.utils.Image.PixelInterface;
+import PixelParticles.Draw.ColorRecalculators.LerpImageColor;
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.core.PVector;
 
 import java.awt.Color;
 import java.nio.file.Path;

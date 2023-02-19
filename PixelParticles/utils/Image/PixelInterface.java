@@ -1,4 +1,4 @@
-package PixelParticles.Image;
+package PixelParticles.utils.Image;
 
 import java.awt.Color;
 

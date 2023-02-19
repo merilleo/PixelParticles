@@ -1,10 +1,10 @@
-package PixelParticles.ParticleSystem;
+package PixelParticles.Draw.ColorRecalculators;
 
-import PixelParticles.Image.Image;
+import PixelParticles.utils.Image.Image;
+import PixelParticles.ParticleSystem.ParticleInterface;
 
 import java.awt.*;
 
-import static PixelParticles.utils.ColorUtils.convertToTransparentColor;
 import static PixelParticles.utils.ColorUtils.getLerpedColor;
 import static PixelParticles.utils.Positions.getNearestIndexFromVector;
 

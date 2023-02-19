@@ -1,4 +1,4 @@
-package PixelParticles.DrawingMethods;
+package PixelParticles.Draw.DrawingMethods;
 
 import PixelParticles.ParticleSystem.ParticleInterface;
 

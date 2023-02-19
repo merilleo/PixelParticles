@@ -1,6 +1,7 @@
-package PixelParticles.ParticleSystem;
+package PixelParticles.Draw.ColorRecalculators;
 
-import PixelParticles.Image.Image;
+import PixelParticles.utils.Image.Image;
+import PixelParticles.ParticleSystem.ParticleInterface;
 
 import java.awt.*;
 
