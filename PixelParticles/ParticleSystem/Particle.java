@@ -37,7 +37,7 @@ public class Particle implements ParticleInterface {
     }
     @Override
     public void update() {
-        this.prev = this.p;
+        this.prev = this.getPosition();
         this.a = this.f.div(this.m);
         this.v.add(this.a);
         this.p.add(this.v);

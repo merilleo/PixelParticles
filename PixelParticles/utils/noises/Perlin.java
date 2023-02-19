@@ -4,14 +4,19 @@ import PixelParticles.Settings;
 import processing.core.PVector;
 
 
+import java.util.Random;
+
+import static java.lang.Math.random;
 import static processing.core.PApplet.floor;
+import static processing.core.PApplet.println;
+
 /*
 * Reference: https://de.wikipedia.org/wiki/Perlin-Noise#:~:text=Perlin%20Noise%20ist%20eine%20Rauschfunktion,er%201997%20einen%20Oscar%20erhielt.
 * */
 public class Perlin {
 
     private static float randomGenerator() {
-        return Settings.rngGenerator.nextFloat()*0.5F;
+        return (float) random();
     }
 
     private static float interpolate(float a0, float a1, float x) {
@@ -23,7 +28,10 @@ public class Perlin {
     }
 
     private static float dotGridGradient (int ix, int iy, PVector vec) {
-        PVector rngVec = new PVector(randomGenerator(), randomGenerator());
+//      TODO : persistent Random generation depending on cells?
+        Random rng = new Random((long) ix * (long) iy);
+        PVector rngVec = new PVector(rng.nextFloat(), rng.nextFloat());
+//        println(ix, iy, rngVec);
         float dx = vec.x - (float) ix;
         float dy = vec.y - (float) iy;
         return dx * rngVec.x + dy * rngVec.y;
@@ -40,7 +48,7 @@ public class Perlin {
         float sy = pos.y - (float) y0;
 
 
-        float n0, n1, ix0, ix1;
+        float n0, n1, ix0, ix1, ix2;
 
         n0  = dotGridGradient(x0, y0, pos);
         n1  = dotGridGradient(x1, y0, pos);
@@ -48,6 +56,8 @@ public class Perlin {
         n0  = dotGridGradient(x0, y1, pos);
         n1  = dotGridGradient(x1, y1, pos);
         ix1 = interpolate(n0, n1, sx);
-        return interpolate(ix0, ix1, sy);
+        ix2 = interpolate(ix0, ix1, sy);
+//        println(pos.x, pos.y, ix2);
+        return ix2;
     }
 }

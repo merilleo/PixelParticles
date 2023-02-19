@@ -14,6 +14,10 @@ public class ScreenWrapper {
         this.buffer = buffer;
     }
 
+    public void setBuffer(int buffer) {
+        this.buffer = buffer;
+    }
+
     private PVector getWrappedPosition(PVector p) {
         if (p.x < 0) {
             p.x = this.w - this.buffer;
@@ -29,17 +33,30 @@ public class ScreenWrapper {
         }
         return p;
     }
+    public boolean detectWrapping(PVector p) {
+        boolean hasBeenWrapped = false;
+
+        if (p.x < 0) {
+            hasBeenWrapped = true;
+        }
+        if (p.x >= this.w) {
+            hasBeenWrapped = true;
+        }
+        if (p.y < 0) {
+            hasBeenWrapped = true;
+        }
+        if (p.y >= this.w) {
+            hasBeenWrapped = true;
+        }
+        return hasBeenWrapped;
+    }
 
     public PVector applyWrapping(PVector pos) {
-        PVector  p = pos.copy();
-        p = this.getWrappedPosition(p);
-        return p;
+        return this.getWrappedPosition( pos.copy() );
     }
 
     public PVector applyWrapping(ParticleInterface particle) {
-        PVector  p = particle.getPosition().copy();
-        p = this.getWrappedPosition(p);
-        return p;
+        return this.getWrappedPosition( particle.getPosition().copy() );
     }
 
 }

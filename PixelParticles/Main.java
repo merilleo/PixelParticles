@@ -1,9 +1,11 @@
 package PixelParticles;
 
+import PixelParticles.Draw.ColorRecalculators.ConstantImageColorWithAlpha;
 import PixelParticles.Draw.DrawingMethods.DrawLine;
 import PixelParticles.Forces.DragForce;
-import PixelParticles.Forces.fields.LinearRandomField;
-import PixelParticles.Forces.fields.RandomFieldObject;
+import PixelParticles.Forces.fields.LinearField;
+import PixelParticles.Forces.fields.fieldObjects.PerlinFieldObject;
+import PixelParticles.Forces.fields.fieldObjects.RandomFieldObject;
 import PixelParticles.utils.Image.Pixel;
 import PixelParticles.utils.Image.PixelInterface;
 import PixelParticles.Draw.ColorRecalculators.LerpImageColor;
@@ -14,7 +16,7 @@ import java.awt.Color;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static PixelParticles.utils.SketchDebugUtils.showFramerate;
+import static PixelParticles.utils.SketchDebugUtils.*;
 
 
 public class Main extends PApplet{
@@ -42,8 +44,12 @@ public class Main extends PApplet{
         //Settings.ps.addForce(new PerlinForce(1, 10F, 0.5F));
         //Settings.ps.addForce(new ValueNoise(1024/4, 1024/4));
 
-        RandomFieldObject fieldObject = new RandomFieldObject();
-        Settings.ps.addForce(new LinearRandomField(0.1F, 20,20, fieldObject, Settings.sketch));
+//        RandomFieldObject randomFieldObject = new RandomFieldObject();
+//        LinearField linearField = new LinearField(0.1F, 20,20, randomFieldObject, Settings.sketch);
+//        Settings.ps.addForce(linearField);
+        PerlinFieldObject perlinFieldObject = new PerlinFieldObject(0.1F);
+        LinearField linearField = new LinearField(0.5F, 50,50, perlinFieldObject, Settings.sketch);
+        Settings.ps.addForce(linearField);
         Settings.ps.addForce(new DragForce());
 
 
@@ -51,11 +57,10 @@ public class Main extends PApplet{
         Settings.ps.addDrawingMethode(new DrawLine(2));
 
 //        Settings.ps.addColorRecalculator(new ForceColor());
-        Settings.ps.addColorRecalculator(new LerpImageColor(Settings.img02, 0.1F));
+//        Settings.ps.addColorRecalculator(new LerpImageColor(Settings.img02, 0.1F));
 //        Settings.ps.addColorRecalculator(new ImageColorWithAlpha(Settings.img02, 255));
-//        Settings.ps.addColorRecalculator(new ConstantImageColorWithAlpha(Settings.img02, 100));
+        Settings.ps.addColorRecalculator(new ConstantImageColorWithAlpha(Settings.img02, 100));
 //        Settings.ps.addColorRecalculator(new PerlinColor());
-
 
         //Settings.ps.addForceList(Settings.forces);
         //Settings.ps.addDrawingMethodeList(Settings.drawingMethods);
@@ -64,9 +69,16 @@ public class Main extends PApplet{
         //Settings.ps.setColorsFromImageWithAlpha(Settings.img02, 255);
         Settings.sketch.image(pimage, 0, 0);
 
+        showFieldValues(linearField);
+
     }
 
     public void draw(){
+//        PerlinFieldObject perlinFieldObject = new PerlinFieldObject(0.1F);
+//        LinearField linearField = new LinearField(0.5F, 50,50, perlinFieldObject, Settings.sketch);
+//        showFieldValues(linearField);
+
+        drawScreenRect(0, 10F);
         Settings.ps.update();
         Settings.ps.drawPS();
         showFramerate();

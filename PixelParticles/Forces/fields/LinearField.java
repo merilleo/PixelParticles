@@ -1,17 +1,15 @@
 package PixelParticles.Forces.fields;
 
-import PixelParticles.Forces.ForceInterface;
+import PixelParticles.Forces.fields.fieldObjects.FieldObjectInterface;
 import PixelParticles.ParticleSystem.ParticleInterface;
 import PixelParticles.utils.ScreenWrapper;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-import static PixelParticles.utils.Positions.getNearestIndex;
-import static PixelParticles.utils.Positions.getNearestIndexFromVector;
+import static PixelParticles.utils.Positions.*;
 import static processing.core.PApplet.*;
-import static processing.core.PConstants.PI;
 
-public class LinearRandomField implements FieldInterface{
+public class LinearField implements FieldInterface{
     float strength;
     int columns;
     int rows;
@@ -21,7 +19,7 @@ public class LinearRandomField implements FieldInterface{
     FieldObjectInterface[] cells;
     FieldObjectInterface[] bakedCells;
 
-    public LinearRandomField(float strength, int columns, int rows, FieldObjectInterface object, PApplet sketch) {
+    public LinearField(float strength, int columns, int rows, FieldObjectInterface object, PApplet sketch) {
         this.strength = strength;
         this.columns = columns;
         this.rows = rows;
@@ -46,12 +44,39 @@ public class LinearRandomField implements FieldInterface{
     @Override
     public void populateField(FieldObjectInterface object) {
         for (int i = 0; i < this.cells.length; i++) {
-            object.generateNewValue();
             this.cells[i] = object.getClone();
+            this.cells[i].setColumn(getXFromIndex(i, this.rows));
+            this.cells[i].setRow(getYFromIndex(i, this.rows));
+//            println(this.cells[i].getColumn(), this.cells[i].getRow(), this.cells[i].getValue());
         }
     }
 
     @Override
     public void bakeField(PApplet sketch) {
+    }
+
+    @Override
+    public int getColumns() {
+        return this.columns;
+    }
+
+    @Override
+    public int getRows() {
+        return this.rows;
+    }
+
+    @Override
+    public float getCellWidth() {
+        return this.cellWidth;
+    }
+
+    @Override
+    public float getCellHeight() {
+        return this.cellHeight;
+    }
+
+    @Override
+    public FieldObjectInterface[] getCells() {
+        return this.cells;
     }
 }
