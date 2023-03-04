@@ -2,21 +2,26 @@ package PixelParticles;
 
 import PixelParticles.Draw.DrawingMethods.DrawingMethodInterface;
 import PixelParticles.Forces.ForceInterface;
+import PixelParticles.ParticleSystem.*;
 import PixelParticles.utils.Image.Image;
 import PixelParticles.Draw.ColorRecalculators.ColorRecalculatorInterface;
-import PixelParticles.ParticleSystem.Particle;
-import PixelParticles.ParticleSystem.ParticleSystem;
+import processing.core.PVector;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public interface Settings {
     Main sketch = new Main();
-    int height = 1024;
-    int width  = 1024;
+    int width  = 1000;
+    int height = 500;
     Random rngGenerator = new Random(1024);
 
-    ParticleSystem ps = new ParticleSystem();
+    ParticleSystem ps = new ParticleSystem.ParticleSystemBuilder()
+            .width(1000)
+            .height(500)
+            .addLinearForce(5.0F, new PVector(2, 1))
+            .build();
+
     Image img01 = new Image(Settings.width, Settings.height);
     Image img02 = new Image(Settings.width, Settings.height);
 

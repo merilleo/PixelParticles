@@ -4,6 +4,7 @@ import PixelParticles.ParticleSystem.ParticleInterface;
 import PixelParticles.Settings;
 
 import static java.lang.Math.abs;
+import static processing.core.PConstants.HSB;
 
 public class DrawLine implements DrawingMethodInterface {
     float size;

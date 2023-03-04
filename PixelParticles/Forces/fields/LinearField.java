@@ -32,13 +32,19 @@ public class LinearField implements FieldInterface{
 
     @Override
     public PVector getForce(ParticleInterface particle) {
+        int cellIndex = this.getCellIndexFromParticlePosition(particle);
+        int cellValue = this.cells[cellIndex].getValue();
+        float angle = map(cellValue, 0, 255, 0, TWO_PI);
+        return PVector.fromAngle(angle).mult(this.strength);
+    }
+
+    @Override
+    public int getCellIndexFromParticlePosition(ParticleInterface particle) {
         PVector cellPosition = particle.getPosition();
-        this.sketchWrapper.applyWrapping(cellPosition);
+        cellPosition = this.sketchWrapper.applyWrapping(cellPosition);
         cellPosition.x /= this.cellWidth;
         cellPosition.y /= this.cellHeight;
-        int index = getNearestIndexFromVector(cellPosition, this.columns );
-        float angle = map(this.cells[index].getValue(), 0, 255, 0, TWO_PI);
-        return PVector.fromAngle(angle).mult(this.strength);
+        return getNearestIndexFromVector(cellPosition, this.columns );
     }
 
     @Override
@@ -79,4 +85,5 @@ public class LinearField implements FieldInterface{
     public FieldObjectInterface[] getCells() {
         return this.cells;
     }
+
 }

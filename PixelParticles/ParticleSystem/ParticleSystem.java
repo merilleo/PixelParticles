@@ -3,6 +3,7 @@ package PixelParticles.ParticleSystem;
 import PixelParticles.Draw.ColorRecalculators.ColorRecalculatorInterface;
 import PixelParticles.Draw.DrawingMethods.DrawingMethodInterface;
 import PixelParticles.Forces.ForceInterface;
+import PixelParticles.Forces.LinearForce;
 import PixelParticles.utils.Image.Image;
 import processing.core.PVector;
 
@@ -14,18 +15,59 @@ import PixelParticles.utils.ScreenWrapper;
 import static PixelParticles.utils.ColorUtils.convertToTransparentColor;
 import static PixelParticles.utils.Positions.getNearestIndexFromVector;
 import static PixelParticles.utils.RandomUtils.random;
+import static processing.core.PApplet.println;
 
-public class ParticleSystem {
+public class ParticleSystem implements ParticleSystemInterface{
+
+    int width;
+    int height;
     ArrayList<ParticleInterface> particles;
     ArrayList<ForceInterface> forces;
     ArrayList<DrawingMethodInterface> drawingMethods;
     ArrayList<ColorRecalculatorInterface> colorRecalculators;
     ScreenWrapper wrapper;
 
+    public static class ParticleSystemBuilder {
+        private int width;
+        private int height;
+        private final ArrayList<ForceInterface> forces;
 
-    public ParticleSystem() {
+        public ParticleSystemBuilder() {
+            // Set default values
+            this.width = 800;
+            this.height = 600;
+            this.forces = new ArrayList<ForceInterface>();
+        }
+        public ParticleSystemBuilder width(int width) {
+            this.width = width;
+            return this;
+        }
+
+        public ParticleSystemBuilder height(int height) {
+            this.height = height;
+            return this;
+        }
+
+        public ParticleSystemBuilder addLinearForce(Float strength, PVector direction) {
+            LinearForce force = new LinearForce.LinearForceBuilder()
+                    .strength(strength)
+                    .direction(direction)
+                    .build();
+            this.forces.add(force);
+            return this;
+        }
+
+        public ParticleSystem build() {
+            return new ParticleSystem(this);
+        }
+    }
+
+
+    public ParticleSystem(ParticleSystemBuilder particleSystemBuilder) {
+        this.width = particleSystemBuilder.width;
+        this.height = particleSystemBuilder.height;
         this.particles = new ArrayList<ParticleInterface>();
-        this.forces = new ArrayList<ForceInterface>();
+        this.forces = particleSystemBuilder.forces;
         this.drawingMethods = new ArrayList<DrawingMethodInterface>();
         this.colorRecalculators = new ArrayList<ColorRecalculatorInterface>();
         this.wrapper = new ScreenWrapper(Settings.width, Settings.height, 1);
@@ -53,14 +95,35 @@ public class ParticleSystem {
         }
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public void addParticle(ParticleInterface particle) {
         this.particles.add(particle);
     }
 
+    @Override
+    public void addParticleList(ArrayList<ParticleInterface> particles) { particles.forEach(this::addParticle); }
+
+    @Override
     public void addForce(ForceInterface force) {
         this.forces.add(force);
     }
 
+    @Override
     public void addForceList(ArrayList<ForceInterface> forceList) {
         forceList.forEach(this::addForce);
     }
@@ -78,7 +141,7 @@ public class ParticleSystem {
     }
 
     public void addColorRecalculatorList(ArrayList<ColorRecalculatorInterface> colorRecalculatorList) {
-        colorRecalculators.forEach( colorRecalculator -> this.addColorRecalculator(colorRecalculator) );
+        colorRecalculatorList.forEach(this::addColorRecalculator);
     }
 
     public void applyForces() {
@@ -131,6 +194,11 @@ public class ParticleSystem {
 
     public int getLength() {
         return  this.particles.size();
+    }
+
+    @Override
+    public void applyForceToAll(ParticleInterface force) {
+
     }
 
 

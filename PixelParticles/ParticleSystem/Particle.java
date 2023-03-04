@@ -21,7 +21,7 @@ public class Particle implements ParticleInterface {
         this.v = new PVector();
         this.a = new PVector();
         this.f = new PVector();
-        this.m = 1;
+        this.m = 40.0F;
         this.col = new Color(0, 0, 0, 0);
     }
 
@@ -41,6 +41,8 @@ public class Particle implements ParticleInterface {
         this.a = this.f.div(this.m);
         this.v.add(this.a);
         this.p.add(this.v);
+//        TODO set dampening variable for v.mult
+        this.v = this.v.mult(0.5F);
         this.a = new PVector();
         this.f = new PVector();
     }

@@ -22,13 +22,13 @@ public class ScreenWrapper {
         if (p.x < 0) {
             p.x = this.w - this.buffer;
         }
-        if (p.x >= this.w) {
+        if (p.x > this.w) {
             p.x = this.buffer;
         }
         if (p.y < 0) {
-            p.y = this.w - this.buffer;
+            p.y = this.h - this.buffer;
         }
-        if (p.y >= this.w) {
+        if (p.y > this.h) {
             p.y = this.buffer;
         }
         return p;
@@ -45,7 +45,7 @@ public class ScreenWrapper {
         if (p.y < 0) {
             hasBeenWrapped = true;
         }
-        if (p.y >= this.w) {
+        if (p.y >= this.h) {
             hasBeenWrapped = true;
         }
         return hasBeenWrapped;
