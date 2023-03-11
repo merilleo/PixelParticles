@@ -29,4 +29,6 @@ public interface ParticleSystemInterface {
     int getLength();
     void applyForceToAll(ParticleInterface force);
     void setColorsFromImage(Image img);
+
+    void drawPS();
 }

@@ -5,6 +5,7 @@ import processing.core.PVector;
 
 import static PixelParticles.utils.noises.Perlin.perlin;
 
+@Deprecated
 public class PerlinForce implements ForceInterface{
     private Integer detail;
     private Float scale;
