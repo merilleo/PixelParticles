@@ -1,7 +1,5 @@
 package PixelParticles.Forces;
 
-import PixelParticles.Forces.LinearForce;
-import PixelParticles.Forces.RandomForce;
 import processing.core.PVector;
 
 public class UniformForceLibrary {

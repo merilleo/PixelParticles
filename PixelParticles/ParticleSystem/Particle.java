@@ -42,7 +42,7 @@ public class Particle implements ParticleInterface {
         this.v.add(this.a);
         this.p.add(this.v);
 //        TODO set dampening variable for v.mult
-        this.v = this.v.mult(0.5F);
+        this.v = this.v.mult(1.0F);
         this.a = new PVector();
         this.f = new PVector();
     }

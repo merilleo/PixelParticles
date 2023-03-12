@@ -1,7 +1,8 @@
 package PixelParticles.utils;
 
 import PixelParticles.Forces.fields.FieldInterface;
-import PixelParticles.Forces.fields.fieldObjects.FieldObjectInterface;
+import PixelParticles.Forces.fields.fieldObjects.ForceFieldObjectInterface;
+import PixelParticles.ParticleSystem.ParticleInterface;
 import PixelParticles.Settings;
 
 public class SketchDebugUtils {
@@ -14,10 +15,10 @@ public class SketchDebugUtils {
         Settings.sketch.text(Settings.sketch.frameRate, 8, 32);
     }
 
-    public static void showFieldValues(FieldInterface field) {
-        for (FieldObjectInterface fieldObject : field.getCells()) {
+    public static void showFieldValues(FieldInterface field, ParticleInterface particle) {
+        for (ForceFieldObjectInterface fieldObject : field.getCells()) {
             Settings.sketch.noStroke();
-            Settings.sketch.fill(fieldObject.getValue());
+            Settings.sketch.fill(fieldObject.getForceVector(particle).x);
             float x = fieldObject.getColumn() * field.getCellWidth();
             float y = fieldObject.getRow() * field.getCellHeight();
             Settings.sketch.rect(x, y, field.getCellWidth(), field.getCellHeight());

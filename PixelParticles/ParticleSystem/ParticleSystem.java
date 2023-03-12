@@ -3,13 +3,13 @@ package PixelParticles.ParticleSystem;
 import PixelParticles.Draw.ColorRecalculators.ColorRecalculatorInterface;
 import PixelParticles.Draw.DrawingMethods.DrawingMethodInterface;
 import PixelParticles.Forces.ForceInterface;
-import PixelParticles.Forces.LinearForce;
+import PixelParticles.Forces.fields.ForceField;
 import PixelParticles.utils.Image.Image;
 import processing.core.PVector;
 
 import java.awt.*;
 import java.util.ArrayList;
-import PixelParticles.Settings;
+
 import PixelParticles.utils.ScreenWrapper;
 
 import static PixelParticles.utils.ColorUtils.convertToTransparentColor;
@@ -32,10 +32,10 @@ public class ParticleSystem implements ParticleSystemInterface{
         private int height;
         private final ArrayList<ForceInterface> forces;
 
-        public ParticleSystemBuilder() {
+        public ParticleSystemBuilder(int width, int height) {
             // Set default values
-            this.width = 800;
-            this.height = 600;
+            this.width = width;
+            this.height = height;
             this.forces = new ArrayList<ForceInterface>();
         }
         public ParticleSystemBuilder width(int width) {
@@ -48,14 +48,14 @@ public class ParticleSystem implements ParticleSystemInterface{
             return this;
         }
 
-        public ParticleSystemBuilder addLinearForce(Float strength, PVector direction) {
-            LinearForce force = new LinearForce.LinearForceBuilder()
-                    .strength(strength)
-                    .direction(direction)
-                    .build();
+
+
+
+        public ParticleSystemBuilder addForceField(ForceInterface force) {
             this.forces.add(force);
             return this;
         }
+
 
         public ParticleSystem build() {
             return new ParticleSystem(this);
@@ -70,7 +70,7 @@ public class ParticleSystem implements ParticleSystemInterface{
         this.forces = particleSystemBuilder.forces;
         this.drawingMethods = new ArrayList<DrawingMethodInterface>();
         this.colorRecalculators = new ArrayList<ColorRecalculatorInterface>();
-        this.wrapper = new ScreenWrapper(Settings.width, Settings.height, 1);
+        this.wrapper = new ScreenWrapper(particleSystemBuilder.width, particleSystemBuilder.height, 1);
     }
 
     public void update() {
@@ -160,7 +160,9 @@ public class ParticleSystem implements ParticleSystemInterface{
         }
     }
 
+
     public void recalculateColors() {
+        // TODO average colors from recalculators
         for (ColorRecalculatorInterface recalculator : this.colorRecalculators) {
             for (ParticleInterface p : this.particles) {
                 Color col = recalculator.getParticleColorFromImage(p);
@@ -170,6 +172,7 @@ public class ParticleSystem implements ParticleSystemInterface{
         }
     }
 
+    // TODO make Spawning and Positioning Methods into Class and implement ?ArrayList for that in ParticleSystem
     public void spawnNumberOfParticles(int num, ParticleInterface particle) {
         for (int i = 0; i < num; i++) {
             this.addParticle(particle.getClone());
@@ -178,7 +181,7 @@ public class ParticleSystem implements ParticleSystemInterface{
 
     public void setRandomPositions() {
         for (int i = 0; i < this.particles.size(); i++) {
-            PVector pos = new PVector(random(Settings.width), random(Settings.height));
+            PVector pos = new PVector(random(this.width), random(this.height));
             this.getParticle(i).setPosition( pos );
             this.getParticle(i).setStartPosition();
         }
