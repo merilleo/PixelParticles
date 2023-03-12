@@ -1,9 +1,7 @@
 package PixelParticles;
 
 import PixelParticles.Draw.ColorRecalculators.ColorRecalculatorLibrary;
-import PixelParticles.Draw.ColorRecalculators.VelocityColor;
 import PixelParticles.Draw.DrawingMethods.DrawLine;
-import PixelParticles.Forces.UniformForceLibrary;
 import PixelParticles.Forces.fields.ForceFieldLibrary;
 import PixelParticles.ParticleSystem.ParticleSystemInterface;
 import processing.core.PApplet;
@@ -42,8 +40,8 @@ public class Main extends PApplet{
 //        Settings.ps.setRandomPositions();
 
         // Because Processing - Images have to be set in setup() !!!
-        Settings.setImage(Settings.img01,"PixelParticles/data/black_1024x1024px.jpg");
-        Settings.setImage(Settings.img02,"PixelParticles/data/uv_checker large.png");
+        Settings.setImage(Settings.img01, "PixelParticles/data/uv_texture_1024x1024.jpg");
+        Settings.setImage(Settings.img02, "PixelParticles/data/uv_texture_1024x1024.jpg");
 
         ColorRecalculatorLibrary.ChangingImageColorSettings.image(Settings.img02);
         ColorRecalculatorLibrary.ChangingImageColorSettings.alpha(255);
