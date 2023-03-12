@@ -2,4 +2,5 @@
 /out/production/pixelParticles_01/
 /pde/
 /Resources/
-/.idea/
+/out
+.idea
